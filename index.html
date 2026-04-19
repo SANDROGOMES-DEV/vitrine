@@ -28,11 +28,22 @@
 
     <script>
         const produtos = [
-            { nome: "Fone Bluetooth Pro", preco: "R$ 89,90", imagem: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300", link: "#" },
-            { nome: "Smartwatch Série 9", preco: "R$ 150,00", imagem: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300", link: "#" },
-            { nome: "Cabo USB-C Rápido", preco: "R$ 15,00", imagem: "https://images.unsplash.com/photo-1589492477829-5e65395b66cc?w=300", link: "#" }
-        ];
-
+    {
+        nome: "Ring Light Profissional com Tripé",
+        preco: "R$ 45,90",
+        imagem: "https://cf.shopee.com.br/file/link-da-foto-aqui", 
+        link: "https://shope.ee/seu-link-afiliado-1",
+        categoria: "Eletrónicos"
+    },
+    {
+        nome: "Kit 12 Pincéis de Maquilhagem",
+        preco: "R$ 29,00",
+        imagem: "https://cf.shopee.com.br/file/link-da-foto-aqui",
+        link: "https://shope.ee/seu-link-afiliado-2",
+        categoria: "Beleza"
+    }
+    // Basta copiar e colar este bloco para cada novo produto!
+];
         function carregarVitrine(lista) {
             const vitrine = document.getElementById('vitrine');
             vitrine.innerHTML = ""; // Limpa a vitrine antes de carregar
