@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3081/3081840.png">
     <style>
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-
 <body class="bg-gray-50 pb-24">
 
     <header class="bg-orange-600 text-white shadow-xl sticky top-0 z-50">
@@ -25,126 +19,90 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="text-center md:text-left">
                     <h1 class="text-2xl font-black tracking-tight">🛍️ MINHA VITRINE</h1>
-                    <p class="text-xs opacity-80 uppercase font-bold">Os melhores achados da Shopee</p>
+                    <p class="text-xs opacity-80 uppercase font-bold">As melhores achadinhas da Shopee</p>
                 </div>
-
+                
                 <div class="relative w-full md:w-1/2">
-                    <input type="text" id="inputBusca" onkeyup="filtrarProdutos()" placeholder="O que estás à procura?"
-                        class="w-full p-3 pl-10 rounded-xl text-gray-800 border-none shadow-inner focus:ring-4 focus:ring-orange-300 outline-none transition-all">
+                    <input type="text" id="inputBusca" onkeyup="filtrarProdutos()" 
+                           placeholder="Pesquisar fones, caixas..." 
+                           class="w-full p-3 pl-10 rounded-xl text-gray-800 border-none shadow-inner focus:ring-4 focus:ring-orange-300 outline-none transition-all">
                     <i class="fas fa-search absolute left-3 top-4 text-gray-400"></i>
                 </div>
             </div>
 
             <div class="flex gap-2 mt-4 overflow-x-auto pb-2 no-scrollbar">
-                <button onclick="filtrarCategoria('Tudo')"
-                    class="bg-white/20 hover:bg-white/40 px-4 py-1.5 rounded-full text-xs font-bold transition">Tudo</button>
-                <button onclick="filtrarCategoria('Eletrónicos')"
-                    class="bg-white/20 hover:bg-white/40 px-4 py-1.5 rounded-full text-xs font-bold transition">Eletrónicos</button>
-
+                <button onclick="filtrarCategoria('Tudo')" class="bg-white/20 hover:bg-white/40 px-4 py-1.5 rounded-full text-xs font-bold transition">Tudo</button>
+                <button onclick="filtrarCategoria('Eletrónicos')" class="bg-white/20 hover:bg-white/40 px-4 py-1.5 rounded-full text-xs font-bold transition">Eletrónicos</button>
             </div>
         </div>
     </header>
 
     <main class="max-w-6xl mx-auto p-4">
         <div id="vitrine" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        </div>
+            </div>
     </main>
 
-    <a href="https://wa.me/351912345678" target="_blank"
-        class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition-all hover:scale-110 z-50 flex items-center justify-center">
+    <a href="https://wa.me/351912345678" target="_blank" 
+       class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition-all hover:scale-110 z-50 flex items-center justify-center">
         <i class="fab fa-whatsapp text-3xl"></i>
     </a>
 
     <script>
-        // 1. BASE DE DADOS DOS PRODUTOS
-        // Para adicionar novos produtos, basta copiar um bloco {...} abaixo
-        const produtos = [
-            {
-                nome: "Astgn X Basike Fone De Ouvido Bluetooth Anc Redução De Ruído Ativo30 horas de navegação",
-                preco: "R$147,81",
-                imagem: "img/headphone.jpg",
-                link: "https://s.shopee.com.br/1gEnlzSlnM",
-                categoria: "Eletrónicos"
-            },
+        let produtosBD = [];
 
-            {
-                nome: "Astgn X Basike Caixa Som Tws 80w Estéreo Alta Hifi Ajuste Graves / AgudosPode carregar o telemóvel",
-                preco: "R$358,80",
-                imagem: "img/Basike_Caixa_Som.jpg",
-                link: "https://s.shopee.com.br/7ppR8q77w8",
-                categoria: "Eletrónicos"
-            },
+        async function carregarDados() {
+            try {
+                const resposta = await fetch('./produtos.json');
+                if (!resposta.ok) throw new Error("Não foi possível carregar o JSON");
+                produtosBD = await resposta.json();
+                carregarVitrine(produtosBD);
+            } catch (erro) {
+                console.error("Erro:", erro);
+                document.getElementById('vitrine').innerHTML = "<p class='col-span-full text-center py-10'>Erro ao carregar os produtos reais.</p>";
+            }
+        }
 
-            {
-                nome: "M10 Fone De Ouvido bluetooth 5.1 Com display Led Tws Touch Redução De Ruído À Prova D'água Sem Fio",
-                preco: "R$21,99",
-                imagem: "img/m10.jpg",
-                link: "https://s.shopee.com.br/9ztvjZbQQ7",
-                categoria: "Eletrónicos"
-            },
-
-        ];
-
-        // 2. FUNÇÃO PARA CARREGAR A VITRINE
         function carregarVitrine(lista) {
             const vitrine = document.getElementById('vitrine');
-            vitrine.innerHTML = "";
+            vitrine.innerHTML = ""; 
 
             if (lista.length === 0) {
-                vitrine.innerHTML = `
-                    <div class="col-span-full text-center py-20">
-                        <i class="fas fa-search-minus text-4xl text-gray-300 mb-4"></i>
-                        <p class="text-gray-500 font-medium">Não encontramos nada com esse nome.</p>
-                        <button onclick="resetarBusca()" class="mt-4 text-orange-600 font-bold">Ver todos os produtos</button>
-                    </div>`;
+                vitrine.innerHTML = `<div class="col-span-full text-center py-20"><p class="text-gray-500 font-medium">Nenhum produto encontrado.</p></div>`;
                 return;
             }
 
             lista.forEach(p => {
-                const card = `
+                vitrine.innerHTML += `
                     <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow flex flex-col overflow-hidden border border-gray-100">
-                        <img src="${p.imagem}" alt="${p.nome}" class="w-full h-44 object-cover">
+                        <img src="${p.imagem}" class="w-full h-44 object-cover" onerror="this.src='https://via.placeholder.com/400?text=Imagem+Não+Encontrada'">
                         <div class="p-3 flex flex-col flex-grow">
-                            <span class="text-[10px] text-orange-600 font-bold uppercase tracking-widest mb-1">${p.categoria}</span>
+                            <span class="text-[10px] text-orange-600 font-bold uppercase mb-1">${p.categoria}</span>
                             <h3 class="text-sm font-semibold text-gray-800 line-clamp-2 h-10 mb-2 leading-tight">${p.nome}</h3>
                             <div class="mt-auto">
                                 <p class="text-lg font-black text-gray-900">${p.preco}</p>
-                                <a href="${p.link}" target="_blank"
-                                   class="mt-3 block bg-orange-500 text-white text-center py-2.5 rounded-xl text-xs font-bold uppercase hover:bg-orange-600 transition-all active:scale-95 shadow-md shadow-orange-200">
-                                   <i class="fas fa-external-link-alt mr-1"></i> Ver Oferta
-                                </a>
+                                <a href="${p.link}" target="_blank" class="mt-3 block bg-orange-500 text-white text-center py-2.5 rounded-xl text-xs font-bold uppercase hover:bg-orange-600 transition-all active:scale-95 shadow-md shadow-orange-200">Ver Oferta</a>
                             </div>
                         </div>
-                    </div>
-                `;
-                vitrine.innerHTML += card;
+                    </div>`;
             });
         }
 
-        // 3. SISTEMA DE BUSCA E FILTRO
         function filtrarProdutos() {
             const termo = document.getElementById('inputBusca').value.toLowerCase();
-            const filtrados = produtos.filter(p => p.nome.toLowerCase().includes(termo));
+            const filtrados = produtosBD.filter(p => p.nome.toLowerCase().includes(termo));
             carregarVitrine(filtrados);
         }
 
         function filtrarCategoria(cat) {
             if (cat === 'Tudo') {
-                carregarVitrine(produtos);
+                carregarVitrine(produtosBD);
             } else {
-                const filtrados = produtos.filter(p => p.categoria === cat);
+                const filtrados = produtosBD.filter(p => p.categoria === cat);
                 carregarVitrine(filtrados);
             }
         }
 
-        function resetarBusca() {
-            document.getElementById('inputBusca').value = "";
-            carregarVitrine(produtos);
-        }
-
-        // Início automático
-        carregarVitrine(produtos);
+        carregarDados();
     </script>
 </body>
-
 </html>
