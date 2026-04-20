@@ -76,5 +76,19 @@
     "imagem": "img/m47.jpg",
     "link": "https://s.shopee.com.br/8phzVLYiYf",
     "categoria": "Eletrónicos"
+    },
+    {
+    "nome": "Short Masculino Kit com 4 bermuda Tactel Premium com elastano",
+    "preco": "R$74,92",
+    "imagem": "img/short.jpg",
+    "link": "https://s.shopee.com.br/2g7MAcCfEx",
+    "categoria": "Moda"
+    },
+    {
+    "nome": "Conjunto Streetwear Milano Italia Camisa 100% Algodão & Short Preto Tactel Mauricinho",
+    "preco": "R$32,90",
+    "imagem": "img/conjunto.jpg",
+    "link": "https://s.shopee.com.br/9paWi5iejt",
+    "categoria": "Moda"
     }
 ]
