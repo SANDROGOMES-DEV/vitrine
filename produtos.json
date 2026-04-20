@@ -19,5 +19,47 @@
         "imagem": "img/m10.jpg",
         "link": "https://s.shopee.com.br/9ztvjZbQQ7",
         "categoria": "Eletrónicos"
+    },
+    {
+        "nome": "Carregador 2em1 Portátil: Bateria 10000mAh + Base Sem Fio para iPhone e Android Tipo-C",
+        "preco": "R$27,99",
+        "imagem": "img/bateria_10000mah.jpg",
+        "link": "https://s.shopee.com.br/7ppRfkEYIc",
+        "categoria": "Eletrónicos"
+    },
+    {
+        "nome": "Smartwatch D20 Pro Relogio inteligente Coloca Foto na Tela Esportivo Bluetooth",
+        "preco": "R$25,00",
+        "imagem": "img/smartwatch_d20.jpg",
+        "link": "https://s.shopee.com.br/AUqCqyIJt1",
+        "categoria": "Eletrónicos"
+    },
+    {
+        "nome": "2026 Novo Smart Watch K9 Ultra Pro Max Seri 10 49mm com 7 Pulseas Esporte",
+        "preco": "R$77,60",
+        "imagem": "img/k9_ultra.jpg",
+        "link": "https://s.shopee.com.br/9UxffLPbce",
+        "categoria": "Eletrónicos"
+    }
+    {
+        "nome": "Jaqueta Blusa Jogger Masculina com Capuz Para Frio Com Refletivo",
+        "preco": "R$31,97",
+        "imagem": "img/moletom.jpg",
+        "link": "https://s.shopee.com.br/9AKpH9PAm2",
+        "categoria": "Moda"
+    },
+    {
+        "nome": "Kit 3 Camisetas Básicas Masculina Slim Algodão T01",
+        "preco": "R$61,90",
+        "imagem": "img/blusas.jpg",
+        "link": "https://s.shopee.com.br/70GKhNF6hk",
+        "categoria": "Moda"
+    },
+    {
+        "nome": "KIT 2 Camisa Gola Polo Alta Qualidade 100% Algodão Camiseta Básica Masculina Diversas Cores",
+        "preco": "R$59,80",
+        "imagem": "img/blusas2.jpg",
+        "link": "https://s.shopee.com.br/4fsPvGoCt6",
+        "categoria": "Moda"
     }
 ]
