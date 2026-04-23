@@ -26,26 +26,15 @@
         const db = getDatabase(app);
         const produtosRef = ref(db, 'produtos'); 
 
-        // HASH DA SENHA: 280320
-        const CHAVE_MESTRA = "897931f87968595997235222272e7960166299d63c46a6f1571f54804670c52a";
-        
-        async function hashSenha(s){
-            const utf8 = new TextEncoder().encode(s);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        window.fazerLogin = async () => {
-            // .trim() remove espaços acidentais antes ou depois da senha
+        // LOGIN DIRETO E SEM BLOQUEIOS
+        window.fazerLogin = () => {
             const senhaDigitada = document.getElementById('senhaAdmin').value.trim();
-            const h = await hashSenha(senhaDigitada);
             
-            if(h === CHAVE_MESTRA){ 
+            if(senhaDigitada === "280320"){ 
                 sessionStorage.setItem('auth_vitrine_pro','true'); 
                 mostrarCadastro(); 
             } else { 
-                alert("Senha Incorreta! Tente novamente."); 
+                alert("Senha Incorreta! Verifique se digitou corretamente."); 
             }
         };
 
